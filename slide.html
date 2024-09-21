@@ -1,0 +1,395 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Fundamentals Course</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .visible {
+            display: block;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 80%;
+            height: auto;
+        }
+        .content {
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="slide visible" id="slide1">
+    <div class="content">
+        <h1>Java Fundamentals - Module 1</h1>
+        <h2>Java Basics</h2>
+        <p><strong>Title:</strong> Installing Java and IntelliJ IDEA</p>
+        <p><strong>Description:</strong> This section covers how to install Java and set up the IntelliJ IDEA IDE.</p>
+        <p><strong>Learning Objectives:</strong> By the end of this section, you will be able to install Java and IntelliJ IDEA, create a project, and run a Java application.</p>
+        <img src="./images/image1.png" alt="Java Installation">
+    </div>
+</div>
+
+<div class="slide" id="slide2">
+    <div class="content">
+        <h2>Installing the Java Development Kit (JDK)</h2>
+        <p>To begin programming in Java, you need to install the Java Development Kit (JDK). The JDK provides all the tools needed to compile and run Java programs.</p>
+        <ul>
+            <li>Download JDK 8 from Oracle's official website.</li>
+            <li>Run the installer and follow the steps for your OS (Windows, macOS, Linux).</li>
+        </ul>
+        <img src="./images/image2.png" alt="JDK Installation">
+    </div>
+</div>
+
+<div class="slide" id="slide3">
+    <div class="content">
+        <h2>Installing IntelliJ IDEA</h2>
+        <p>IntelliJ IDEA is a smart IDE that supports Java and various frameworks.</p>
+        <p>Steps to install IntelliJ IDEA:</p>
+        <ol>
+            <li>Download IntelliJ IDEA Community Edition from the official website.</li>
+            <li>Follow the installer steps for your operating system.</li>
+        </ol>
+        <img src="./images/image3.png" alt="IntelliJ IDEA Installation">
+    </div>
+</div>
+
+<div class="slide" id="slide4">
+    <div class="content">
+        <h2>Initial Setup of IntelliJ IDEA</h2>
+        <p>When you first launch IntelliJ IDEA, an initial setup wizard will guide you through enabling plugins and selecting your development environment.</p>
+        <img src="./images/image4.png" alt="IntelliJ Initial Setup">
+    </div>
+</div>
+
+<div class="slide" id="slide5">
+    <div class="content">
+        <h2>Creating a New Project in IntelliJ IDEA</h2>
+        <p>Once IntelliJ IDEA is installed and configured, you can create a new project by selecting <strong>Create New Project</strong> from the start screen.</p>
+        <img src="./images/image5.png" alt="Create New Project">
+    </div>
+</div>
+
+<div class="slide" id="slide6">
+    <div class="content">
+        <h2>Selecting the Project Type</h2>
+        <p>In the next step, choose <strong>Java</strong> as the project type and click <strong>Next</strong>.</p>
+        <img src="./images/image6.png" alt="Select Project Type">
+    </div>
+</div>
+
+<div class="slide" id="slide7">
+    <div class="content">
+        <h2>Defining the Project Name and Location</h2>
+        <p>Provide a name for the project and specify the folder location where it should be saved.</p>
+        <img src="./images/image7.png" alt="Project Name and Location">
+    </div>
+</div>
+
+<div class="slide" id="slide8">
+    <div class="content">
+        <h2>Project Structure in IntelliJ IDEA</h2>
+        <p>After setting up the project, you will see the project structure displayed in IntelliJ IDEA. The <code>src</code> directory is where you will add your Java classes.</p>
+        <img src="./images/image8.png" alt="Project Structure">
+    </div>
+</div>
+
+<div class="slide" id="slide9">
+    <div class="content">
+        <h2>Creating a Java Class</h2>
+        <p>To create a new Java class, right-click on the <code>src</code> directory, choose <strong>New</strong>, and select <strong>Java Class</strong>.</p>
+        <img src="./images/image9.png" alt="Creating a Java Class">
+    </div>
+</div>
+
+<div class="slide" id="slide10">
+    <div class="content">
+        <h2>Running Your Java Application</h2>
+        <p>After writing your code in the <code>main</code> method, you can run the application by clicking the green play button in IntelliJ IDEA.</p>
+        <img src="./images/image10.png" alt="Run Java Application">
+    </div>
+</div>
+
+<div class="slide" id="slide11">
+    <div class="content">
+        <h2>Result of Running the Java Application</h2>
+        <p>Once the Java application runs successfully, you will see the output in the console, such as <code>Hello world!</code>.</p>
+        <img src="./images/image11.png" alt="Java Output">
+    </div>
+</div>
+
+<div class="slide" id="slide12">
+    <div class="content">
+        <h2>Version Control with GIT</h2>
+        <p>GIT is a version control system that helps developers track changes to their code and collaborate with others.</p>
+        <img src="./images/image12.png" alt="GIT Version Control">
+    </div>
+</div>
+
+<div class="slide" id="slide13">
+    <div class="content">
+        <h2>Installing GIT</h2>
+        <p>Steps to install GIT:</p>
+        <ol>
+            <li>Download GIT from the official website.</li>
+            <li>Run the installer and follow the instructions.</li>
+            <li>Verify the installation by running <code>git version</code> in the command prompt or terminal.</li>
+        </ol>
+        <img src="./images/image13.png" alt="GIT Installation">
+    </div>
+</div>
+
+<div class="slide" id="slide14">
+    <div class="content">
+        <h2>Creating a GitHub Repository</h2>
+        <p>GitHub is a cloud-based service for managing GIT repositories. To create a repository:</p>
+        <ol>
+            <li>Go to <a href="https://github.com">GitHub</a> and create an account.</li>
+            <li>Create a new repository by clicking <strong>New</strong> on the homepage.</li>
+        </ol>
+        <img src="./images/image14.png" alt="GitHub Repository Creation">
+    </div>
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides[currentSlide].classList.remove('visible');
+        currentSlide = (index + slides.length) % slides.length;
+        slides[currentSlide].classList.add('visible');
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowRight') {
+            showSlide(currentSlide + 1);
+        } else if (event.key === 'ArrowLeft') {
+            showSlide(currentSlide - 1);
+        }
+    });
+</script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Fundamentals Presentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+        .slide {
+            display: none;
+            max-width: 90%;
+            max-height: 90%;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: auto;
+        }
+        .active {
+            display: block;
+        }
+        .slide img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+        .nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .nav button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="slide active" id="slide-1">
+        <h2>Modulul 1. Java Basics</h2>
+        <p>Instalare Java. Instalare și configurarea IntelliJ IDEA</p>
+        <ul>
+            <li>Instalare Java Development Kit</li>
+            <li>Mediul integrat de dezvoltare IntelliJ IDEA</li>
+            <li>Rularea și configurarea inițială IntelliJ IDEA</li>
+            <li>Instalare GIT</li>
+            <li>Creare Repozitoriu GIT</li>
+        </ul>
+    </div>
+
+    <div class="slide" id="slide-2">
+        <h2>Instalare Java Development Kit</h2>
+        <p>Descărcați JDK 8 de pe site-ul oficial Oracle pentru sistemul dumneavoastră de operare.</p>
+        <p>Pe Windows:</p>
+        <ol>
+            <li>Rulați fișierul descărcat;</li>
+            <li>Urmați pașii din cadrul asistentului de instalare.</li>
+        </ol>
+    </div>
+
+    <div class="slide" id="slide-3">
+        <h2>Verificare Instalare JDK</h2>
+        <p>Rulați următoarea comandă: <code>java --version</code></p>
+        <p>Ca urmare a execuției acestei comenzi vă va fi afișată versiunea instalată de Java:</p>
+        <pre>
+Java version "1.8.0_131"
+Java(TM) SE Runtime Environment (build 1.8.0_131-b11)
+Java HotSpot(TM) 64-Bit Server VM (build 25.131-b11 mixed mode)
+        </pre>
+    </div>
+
+    <div class="slide" id="slide-4">
+        <h2>Figura 1 - Selectarea opțiunii de creare a unui proiect</h2>
+        <p>În fereastra de start, alegeți <strong>Create New Project</strong>.</p>
+        <img src="./images/image1.png" alt="Figura 1 - Selectarea opțiunii de creare a unui proiect">
+    </div>
+
+    <div class="slide" id="slide-5">
+        <h2>Figura 2 - Selectarea tipului de proiect</h2>
+        <p>Selectați Java ca tehnologie, apoi apăsați butonul <strong>Next</strong>.</p>
+        <img src="./images/image2.png" alt="Figura 2 - Selectarea tipului de proiect">
+    </div>
+
+    <div class="slide" id="slide-6">
+        <h2>Figura 3 - Posibilitatea de a crea un proiect folosind un șablon predefinit</h2>
+        <p>Nu vom folosi un șablon, apăsați butonul <strong>Next</strong>.</p>
+        <img src="./images/image3.png" alt="Figura 3 - Proiect folosind șablon predefinit">
+    </div>
+
+    <div class="slide" id="slide-7">
+        <h2>Figura 4 - Definirea numelui și locației proiectului</h2>
+        <p>Tastați numele proiectului și locația pe calculator, apoi apăsați butonul <strong>Finish</strong>.</p>
+        <img src="./images/image4.png" alt="Figura 4 - Definirea numelui și locației proiectului">
+    </div>
+
+    <div class="slide" id="slide-8">
+        <h2>Figura 5 - Vizualizarea structurii proiectului în IDE</h2>
+        <p>Fereastra principală arată structura proiectului după ce ați creat proiectul.</p>
+        <img src="./images/image5.png" alt="Figura 5 - Structura proiectului">
+    </div>
+
+    <div class="slide" id="slide-9">
+        <h2>Figura 6 - Posibile acțiuni asupra directoriului src</h2>
+        <p>Apăsați click dreapta pe directoriul <strong>src</strong> pentru a vedea meniul de opțiuni.</p>
+        <img src="./images/image6.png" alt="Figura 6 - Acțiuni asupra src">
+    </div>
+
+    <div class="slide" id="slide-10">
+        <h2>Figura 7 - Crearea unei clase Java</h2>
+        <p>În directoriul <strong>src</strong>, creați o clasă cu numele <strong>FirstApp</strong>.</p>
+        <img src="./images/image7.png" alt="Figura 7 - Crearea unei clase Java">
+    </div>
+
+    <div class="slide" id="slide-11">
+        <h2>Figura 9 - Opțiunile de rulare a programului Java</h2>
+        <p>Odată creată clasa <strong>FirstApp</strong>, rulați programul folosind metoda <code>main</code>.</p>
+        <pre>
+class FirstApp {
+    public static void main(String[] args) {
+        System.out.println("Hello world!");
+    }
+}
+        </pre>
+        <img src="./images/image8.png" alt="Figura 9 - Opțiunile de rulare a programului">
+    </div>
+
+    <div class="slide" id="slide-12">
+        <h2>Figura 10 - Rezultatul execuției programului Java</h2>
+        <p>Ca urmare a execuției programului, rezultatul va fi afișat în consolă.</p>
+        <img src="./images/image9.png" alt="Figura 10 - Rezultatul execuției">
+    </div>
+
+    <div class="nav">
+        <button id="prevSlide">Previous</button>
+        <button id="nextSlide">Next</button>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+    }
+    
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+    
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+    
+    document.getElementById('nextSlide').addEventListener('click', nextSlide);
+    document.getElementById('prevSlide').addEventListener('click', prevSlide);
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+            nextSlide();
+        } else if (e.key === 'ArrowLeft') {
+            prevSlide();
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+/* #slide-1 {
+    display: block;
+}
+
+#slide-2 {
+    display: none;
+} */
+
+.slide {
+    display: block;
+}
+
+
+body {
+    margin-inline: 0px  !important;
+    padding: 0 !important;
+}
