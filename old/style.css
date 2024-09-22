@@ -19,7 +19,7 @@ body {
     max-width: 1200px;
     margin: 20px auto; /* Reduced top margin */
     padding: 20px; /* Reduced padding */
-    background-color: rgb(187, 65, 65);
+    background-color: rgb(255, 255, 255);
     box-sizing: border-box;
     overflow-y: auto;
     max-height: calc(100vh - 40px); /* Adjusted for new top and bottom margin */
