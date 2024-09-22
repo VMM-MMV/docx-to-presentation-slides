@@ -107,6 +107,12 @@ def add_css_body(html_content):
 
     return html_content
 
+def add_script(html_content):
+    end = find_body_end(html_content)
+    html_content = html_content[:end] + '<script src="script.js"></script>' + html_content[end:]
+
+    return html_content
+
 html_content = read_file("CursJavaFundamentals.html")
 
 html_content = replace_css(html_content)
@@ -114,5 +120,7 @@ html_content = replace_css(html_content)
 html_content = add_css_body(html_content)
 
 html_content = add_slides(html_content)
+
+html_content = add_script(html_content)
 
 write_file("jora.html", html_content)
