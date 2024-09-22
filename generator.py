@@ -47,7 +47,11 @@ def get_top_and_bottom_of_slide(slide_html):
         return slide_html
 
     # get rid of the body and head in the slide
-    body_start_end = get_body_start_end(slide_html) + 1
+    body_start_end = get_body_start_end(slide_html)
+    if body_start_end == -1:
+        body_start_end = slide_html.find("</head>") + len("</head>")
+    else:
+        body_start_end += 1
 
     slide_html = slide_html[body_start_end:]
     slide_html = slide_html.replace("</body>", "")
@@ -93,6 +97,10 @@ def get_body_start(html_content):
 
 def get_body_start_end(html_content):
     html_body_start = get_body_start(html_content)
+    if html_body_start == -1: 
+        print("No <body class='...'> found")
+        return -1
+    
     html_body_start = html_content.find(">", html_body_start)
     return html_body_start
 
@@ -119,6 +127,10 @@ def add_slides_class_body(html_content, slide_html):
     slides_body_start = get_body_start(slide_html) 
     slides_body_end = get_body_start_end(slide_html)
 
+    if slides_body_start == -1 or slides_body_end == -1:
+        print("class body non existent", f"slides_body_start = {slides_body_start},", f"slides_body_end = {slides_body_end}") 
+        return html_content
+    
     slide_html_class_body = slide_html[slides_body_start:slides_body_end].split("=")[1]
 
     html_body_start = get_body_start_end(html_content)

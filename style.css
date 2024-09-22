@@ -3,10 +3,11 @@ html, body {
     padding: 0;
     height: 100%;
     width: 100%;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    background-color: rgb(255, 255, 255);
+    background-color: #f0f0f0;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -15,37 +16,47 @@ body {
 }
 
 .body {
-    width: 80%;
-    max-width: 1200px;
-    margin: 20px auto; /* Reduced top margin */
-    padding: 20px; /* Reduced padding */
-    background-color: rgb(255, 255, 255);
-    box-sizing: border-box;
-    overflow-y: auto;
-    max-height: calc(100vh - 40px); /* Adjusted for new top and bottom margin */
+    width: 90%;
+    max-width: 1024px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 4px;
 }
 
 .slide {
     width: 100%;
     box-sizing: border-box;
-    margin-top: 0; /* Ensure no extra space at the top of the slide */
-    padding-top: 0; /* Ensure no extra padding at the top of the slide */
+    margin-top: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
 }
+
+/* PowerPoint-like header */
+.slide > div:first-child {
+    background: linear-gradient(135deg, #4285f4, #34a853);
+    color: white;
+    padding: 20px;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+/* Content area */
+.slide > div:not(:first-child) {
+    padding: 20px;
+}
+
+p { font-size: 1.1em; }
 
 /* Ensure all direct children of .body are full width */
 .body > * {
     width: 100%;
     box-sizing: border-box;
-    margin-top: 0; /* Remove top margin from first child */
 }
 
-/* Add this if you want to ensure text doesn't overflow its container */
-.body, .slide, div {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-/* If there are any parent containers that might be restricting width, add this */
+/* Additional classes to maintain compatibility */
 .c29, .c48, .doc-content {
     width: 100% !important;
     max-width: none !important;
@@ -53,8 +64,16 @@ body {
     padding: 0 !important;
 }
 
-/* New rule to adjust the first element inside .body */
-.body > *:first-child {
-    margin-top: -20px;
-    padding-top: 0;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .body {
+        width: 95%;
+        margin: 10px auto;
+    }
+
+    .slide > div:first-child {
+        font-size: 1.5em;
+        padding: 15px;
+    }
+
 }
