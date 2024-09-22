@@ -1,7 +1,11 @@
 import sys
 import re
+import logging
 
 SLIDE_HTML_PATH = "slide.html"
+
+logging.basicConfig(level=logging.WARNING)
+log = logging.getLogger(__name__)
 
 def get_argv():
     if len(sys.argv) > 2:
@@ -9,7 +13,7 @@ def get_argv():
         arg2 = sys.argv[2]
         return arg1, arg2
     else:
-        print("Please provide two arguments.")
+        log.warning("Please provide two arguments.")
 
 def read_file(file_path):
     with open(file_path, 'r') as f:
@@ -95,7 +99,7 @@ def get_body_start_end(html_content):
     """Find the position right after the <body> tag start."""
     html_body_start = get_body_start(html_content)
     if html_body_start == -1: 
-        print("No <body class='...'> found")
+        log.warning("No <body class='...'> found")
         return -1
     
     html_body_start = html_content.find(">", html_body_start)
@@ -123,7 +127,7 @@ def add_slides_class_body(html_content, slide_html):
     slides_body_end = get_body_start_end(slide_html)
 
     if slides_body_start == -1 or slides_body_end == -1:
-        print("class body non existent", f"slides_body_start = {slides_body_start},", f"slides_body_end = {slides_body_end}") 
+        log.warning("class body non existent" + f" slides_body_start = {slides_body_start}, " + f"slides_body_end = {slides_body_end}") 
         return html_content
     
     slide_html_class_body = slide_html[slides_body_start:slides_body_end].split("=")[1]
