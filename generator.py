@@ -20,28 +20,24 @@ def write_file(file_path, file_content):
         return f.write(file_content)
     
 def replace_css(html_content, slide_html):
-    start = slide_html.find("<head>")
-    end = slide_html.find("</head>") + len("</head>")
-
-    slide_head_content = slide_html[start:end]
-
-    start = html_content.find("<head>")
-    end = html_content.find("</head>") + len("</head>")
-
-    html_head_content = html_content[start:end]
-
-    html_content = html_content.replace(html_head_content, slide_head_content)
-    return html_content
+    """Replace the <head> content from html_content with slide_html."""
+    def extract_head(html):
+        start = html.find("<head>")
+        end = html.find("</head>") + len("</head>")
+        return html[start:end]
+    
+    return html_content.replace(extract_head(html_content), extract_head(slide_html))
     
 def get_top_and_bottom_of_slide(slide_html):
-    def calculate_top_of_slide(slide_html):
+    """Extract the top and bottom of the slide content, ignoring <body> and <head> tags."""
+    def get_top_of_slide(slide_html):
         slide_html = slide_html.split("</")[0]
         start = slide_html.find("<")
         end = slide_html.rfind(">")
         slide_html = slide_html[start:end+1]
         return slide_html
 
-    def calculate_bottom_of_slide(slide_html, slide_html_top):
+    def get_bottom_of_slide(slide_html, slide_html_top):
         slide_html = slide_html.replace(slide_html_top, "")
         slide_html = re.sub(r'\s+', '', slide_html)
         return slide_html
@@ -56,32 +52,32 @@ def get_top_and_bottom_of_slide(slide_html):
     slide_html = slide_html[body_start_end:]
     slide_html = slide_html.replace("</body>", "")
 
-    slide_html_top = calculate_top_of_slide(slide_html)
-    slide_html_bottom = calculate_bottom_of_slide(slide_html, slide_html_top)
+    slide_html_top = get_top_of_slide(slide_html)
+    slide_html_bottom = get_bottom_of_slide(slide_html, slide_html_top)
     return slide_html_top, slide_html_bottom
 
 def add_slides(html_content, slide_html):
-    def get_start_and_end_of_slide(html_content, start):
-        left_bracket_occurance, right_bracket_occurance = 0, 0
-        left_pointer, right_pointer = start, start
-        while left_bracket_occurance != 2:
-            left_pointer -= 1
-            if html_content[left_pointer] == "<":
-                left_bracket_occurance += 1
+    """Insert slide contents into placeholders in html_content."""
+    def get_slide_bounds(content, index):
+        left_brackets, right_brackets = 0, 0
+        left, right = index, index
 
-        while right_bracket_occurance != 2:
-            right_pointer += 1
-            if html_content[right_pointer] == ">":
-                right_bracket_occurance += 1
+        while left_brackets < 2:
+            left -= 1
+            if content[left] == "<":
+                left_brackets += 1
 
-        return left_pointer, right_pointer+1
+        while right_brackets < 2:
+            right += 1
+            if content[right] == ">":
+                right_brackets += 1
+
+        return left, right + 1
     
     def replace_slide_marker(html_content, slide_marker, replace_with):
-        start_occurrence = html_content.find(slide_marker)
-        while start_occurrence != -1:
-            left, right = get_start_and_end_of_slide(html_content, start_occurrence)
+        while (start_occurrence := html_content.find(slide_marker)) != -1:
+            left, right = get_slide_bounds(html_content, start_occurrence)
             html_content = html_content.replace(html_content[left:right], replace_with)
-            start_occurrence = html_content.find(slide_marker)
         return html_content
     
     slides_html_top, slides_html_bottom = get_top_and_bottom_of_slide(slide_html)
@@ -96,6 +92,7 @@ def get_body_start(html_content):
     return body_pointer
 
 def get_body_start_end(html_content):
+    """Find the position right after the <body> tag start."""
     html_body_start = get_body_start(html_content)
     if html_body_start == -1: 
         print("No <body class='...'> found")
@@ -109,21 +106,19 @@ def get_body_end(html_content):
     return body_pointer
 
 def add_css_body(html_content):
+    """Wrap the body content in a <div class='body'> tag."""
     start = get_body_start_end(html_content) + 1
-    html_content = html_content[:start] + '<div class="body">' + html_content[start:]
-
     end = get_body_end(html_content)
-    html_content = html_content[:end] + '</div>' + html_content[end:]
 
-    return html_content
+    return html_content[:start] + '<div class="body">' + html_content[start:end] + '</div>' + html_content[end:]
 
 def add_script(html_content):
+    """Append a script tag before the closing </body> tag."""
     end = get_body_end(html_content)
-    html_content = html_content[:end] + '<script src="script.js"></script>' + html_content[end:]
-
-    return html_content
+    return html_content[:end] + '<script src="script.js"></script>' + html_content[end:]
 
 def add_slides_class_body(html_content, slide_html):
+    """Transfer the body class from slide_html to html_content."""
     slides_body_start = get_body_start(slide_html) 
     slides_body_end = get_body_start_end(slide_html)
 
