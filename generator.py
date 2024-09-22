@@ -57,7 +57,7 @@ def get_top_and_bottom_of_slide(slide_html):
     return slide_html_top, slide_html_bottom
 
 def add_slides(html_content, slide_html):
-    def get_start_end_of_slide(html_content, start):
+    def get_start_and_end_of_slide(html_content, start):
         left_bracket_occurance, right_bracket_occurance = 0, 0
         left_pointer, right_pointer = start, start
         while left_bracket_occurance != 2:
@@ -75,7 +75,7 @@ def add_slides(html_content, slide_html):
     def replace_slide_marker(html_content, slide_marker, replace_with):
         start_occurrence = html_content.find(slide_marker)
         while start_occurrence != -1:
-            left, right = get_start_end_of_slide(html_content, start_occurrence)
+            left, right = get_start_and_end_of_slide(html_content, start_occurrence)
             html_content = html_content.replace(html_content[left:right], replace_with)
             start_occurrence = html_content.find(slide_marker)
         return html_content
