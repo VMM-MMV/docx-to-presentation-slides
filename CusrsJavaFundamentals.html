@@ -4,124 +4,139 @@
     <meta content="text/html; charset=UTF-8" http-equiv="content-type">
     <link rel="stylesheet" href="uselessstyles.css">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 </head>
 
-<body class="c29 c48 doc-content">
+<body class="c29 c48 doc-content bg-gradient-to-br from-blue-100 to-purple-100 min-h-screen p-8">
 <div class="body">
-    <p class="c1 c15"><span class="c10"></span></p>
-    <div class="slide">
-        <table class="c39">
-            <tr class="c70">
-                <td class="c58" colspan="3" rowspan="1">
-                    <h1 class="c42" id="h.gjdgxs"><span class="c4 c19">Modulul 1. Java Basics</span></h1>
-                </td>
-            </tr>
-            <tr class="c65">
-                <td class="c54" colspan="1" rowspan="1">
-                    <h2 class="c37" id="h.30j0zll"><span class="c7 c4">Titlu</span></h2>
-                </td>
-                <td class="c72" colspan="1" rowspan="1">
-                    <h2 class="c37" id="h.1fob9te"><span class="c4 c7">Descriere</span></h2>
-                </td>
-                <td class="c22" colspan="1" rowspan="1">
-                    <h2 class="c37" id="h.3znysh7"><span class="c7 c4">Obiective de &icirc;nv&#259;&#539;are</span></h2>
-                </td>
-            </tr>
-            <tr class="c59">
-                <td class="c62" colspan="1" rowspan="1">
-                    <h2 class="c42" id="h.2et92p0"><span class="c7 c4">Lec&#539;ia 0</span></h2>
-                    <p class="c42 c15"><span class="c5"></span></p>
-                    <h2 class="c42" id="h.tyjcwt"><span class="c7 c4">Instalare Java. Instalare &#537;i configurarea
-                            IntelliJ IDEA</span></h2>
-                </td>
-                <td class="c68" colspan="1" rowspan="1">
-                    <h2 class="c42" id="h.3dy6vkm"><span class="c7 c4">Subiecte:</span></h2>
-                    <ul class="c32 lst-kix_list_10-0 start">
-                        <li class="c6 li-bullet-0"><span class="c5">Instalare Java Development Kit</span></li>
-                        <li class="c6 li-bullet-0"><span class="c5">Mediul integrat de dezvoltare Intellij IDEA</span></li>
-                        <li class="c6 li-bullet-0"><span class="c5">Instalarea Intellij IDEA</span></li>
-                        <li class="c6 li-bullet-0"><span class="c5">Rularea &#537;i configurarea ini&#539;ial&#259; Intellij
-                                IDEA</span></li>
-                        <li class="c6 li-bullet-0"><span class="c5">Instalare GIT</span></li>
-                        <li class="c6 li-bullet-0"><span class="c5">Creare Repozitoriu GIT</span></li>
-                    </ul>
-                    <p class="c42 c15 c73"><span class="c5"></span></p>
-                </td>
-                <td class="c49" colspan="1" rowspan="1">
-                    <h2 class="c42" id="h.1t3h5sf"><span class="c7 c4">Cursantul va fi capabil:</span></h2>
-                    <ul class="c32 lst-kix_list_4-0 start">
-                        <li class="c6 li-bullet-0"><span class="c5">S&#259; instaleze Java</span></li>
-                        <li class="c6 li-bullet-0"><span class="c8">S&#259; instaleze &#537;i s&#259; configureze mediul
-                                integrat de dezvoltare IntelliJ IDEA</span></li>
-                        <li class="c6 li-bullet-0"><span class="c8">S&#259; creeze un proiect &icirc;n IntelliJ IDEA</span>
-                        </li>
-                        <li class="c6 li-bullet-0"><span class="c5">S&#259; ruleze o aplica&#539;ie Java folosind IntelliJ
-                                IDEA</span></li>
-                    </ul>
-                </td>
-            </tr>
-            <tr class="c60">
-                <td class="c62" colspan="1" rowspan="1">
-                    <h2 class="c42" id="h.4d34og8"><span class="c7 c4">&Icirc;ntreb&#259;ri / Exerci&#539;ii</span></h2>
-                </td>
-                <td class="c51" colspan="2" rowspan="1">
-                    <h2 class="c42" id="h.2s8eyo1"><span class="c7 c4">Exerci&#539;ii de:</span></h2>
-                    <ul class="c32 lst-kix_list_8-0 start">
-                        <li class="c6 li-bullet-0"><span class="c5">Creare a unui proiect Java</span></li>
-                        <li class="c6 li-bullet-0"><span class="c5">Rularea unei aplica&#539;ii Java folosind mediul
-                                integrat de dezvoltare IntelliJ IDEA</span></li>
-                    </ul>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-
-    <div class="slide">
         <p class="c1 c15"><span class="c10"></span></p>
-        <h4 class="c3 c30" id="h.17dp8vu"><span class="c35 c8">Instalare Java Development Kit</span></h4>
-        <p class="c28"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="c5">&Icirc;nainte de a
-                &icirc;ncepe studierea limbajului de programare Java este necesar&#259; instalarea kit-ului de dezvoltare
-                Java - Java Development Kit. JDK este o component&#259; major&#259; a mediului Java &#537;i ofer&#259; toate
-                instrumentele &#537;i fi&#537;ierele binare executabile necesare pentru compilarea, depanarea &#537;i
-                executarea programelor Java.</span></p>
-        <p class="c12 c15"><span class="c5"></span></p>
-        <p class="c12"><span class="c8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Desc&#259;rca&#539;i JDK 8 de pe
-            </span><span class="c8 c13"><a class="c38"
-                    href="https://www.google.com/url?q=https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html&amp;sa=D&amp;source=editors&amp;ust=1726943350778550&amp;usg=AOvVaw0_-L3Z9leW-gndw4csSniG">site-ul
-                    oficial Oracle</a></span><span class="c5">&nbsp;pentru sistemul dumneavoastr&#259; de operare.</span>
-        </p>
-        <p class="c9"><span class="c5">Pe Windows:</span></p>
-        <ol class="c32 lst-kix_list_6-0 start" start="1">
-            <li class="c25 li-bullet-0"><span class="c5">Rula&#539;i fi&#537;ierul desc&#259;rcat;</span></li>
-            <li class="c46 li-bullet-0"><span class="c5">Urma&#539;i pa&#537;ii din cadrul asistentului de instalare.</span>
-            </li>
-        </ol>
-        <p class="c9"><span class="c5">Pe Mac OS:</span></p>
-        <ol class="c32 lst-kix_list_2-0 start" start="1">
-            <li class="c25 li-bullet-0"><span class="c5">Rula&#539;i fi&#537;ierul desc&#259;rcat;</span></li>
-            <li class="c46 li-bullet-0"><span class="c5">Urma&#539;i pa&#537;ii din cadrul asistentului de instalare.</span>
-            </li>
-        </ol>
-        <p class="c9"><span class="c5">Pe Linux:</span></p>
-        <ol class="c32 lst-kix_list_1-0 start" start="1">
-            <li class="c25 li-bullet-0"><span class="c5">Naviga&#539;i c&#259;tre directoriul &icirc;n care dori&#539;i
-                    s&#259; instala&#539;i Java;</span></li>
-            <li class="c28 c50 li-bullet-0"><span class="c5">Copia&#539;i fi&#537;ierul desc&#259;rcat &icirc;n mapa
-                    curent&#259;;</span></li>
-            <li class="c28 c50 li-bullet-0"><span class="c5">Despacheta&#539;i fi&#537;ierul .tar.gz;</span></li>
-            <li class="c46 li-bullet-0"><span class="c5">&#536;terge&#539;i fi&#537;ierul .tar.gz din mapa
-                    curent&#259;.</span></li>
-        </ol>
-        <p class="c9 c31"><span class="c8">Pentru a v&#259; asigura c&#259; JDK a fost instalat cu succes, deschide&#539;i
-                linia de comand pentru Windows, sau terminalul pentru Mac OS &#537;i Linux. Rula&#539;i urm&#259;toarea
-                comand&#259;: </span><span class="c8 c24">java --version</span><span class="c5">.</span></p>
-        <p class="c9 c31"><span class="c5">Ca urmare a execu&#539;ie acestei comenzi v&#259; va fi afi&#537;at&#259;
-                versiunea instalat&#259; de Java:</span></p>
-        <p class="c2"><span class="c7 c23">Java version &quot;1.8.0_131&quot;</span></p>
-        <p class="c2"><span class="c7 c23">Java(TM) SE Runtime Environment (build 1.8.0_131-b11)</span></p>
-        <p class="c2"><span class="c23">Java HotSpot(TM) 64-Bit Server VM (build 25.131-b11, mixed mode)</span></p>
-    </div>
+        <div class="max-w-4xl mx-auto">
+                <div class="slide bg-white rounded-xl shadow-2xl overflow-hidden mb-8 transition-transform duration-300 hover:scale-105">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-4">
+                                <table class="c39">
+                                <tr class="c70">
+                                        <td class="c58" colspan="3" rowspan="1">
+                                        <h1 class="c42" id="h.gjdgxs"><span class="c4 c19">Modulul 1. Java Basics</span></h1>
+                                        </td>
+                                </tr>
+                                <tr class="c65">
+                                        <td class="c54" colspan="1" rowspan="1">
+                                        <h2 class="c37" id="h.30j0zll"><span class="c7 c4">Titlu</span></h2>
+                                        </td>
+                                        <td class="c72" colspan="1" rowspan="1">
+                                        <h2 class="c37" id="h.1fob9te"><span class="c4 c7">Descriere</span></h2>
+                                        </td>
+                                        <td class="c22" colspan="1" rowspan="1">
+                                        <h2 class="c37" id="h.3znysh7"><span class="c7 c4">Obiective de &icirc;nv&#259;&#539;are</span></h2>
+                                        </td>
+                                </tr>
+                                <tr class="c59">
+                                        <td class="c62" colspan="1" rowspan="1">
+                                        <h2 class="c42" id="h.2et92p0"><span class="c7 c4">Lec&#539;ia 0</span></h2>
+                                        <p class="c42 c15"><span class="c5"></span></p>
+                                        <h2 class="c42" id="h.tyjcwt"><span class="c7 c4">Instalare Java. Instalare &#537;i configurarea
+                                                IntelliJ IDEA</span></h2>
+                                        </td>
+                                        <td class="c68" colspan="1" rowspan="1">
+                                        <h2 class="c42" id="h.3dy6vkm"><span class="c7 c4">Subiecte:</span></h2>
+                                        <ul class="c32 lst-kix_list_10-0 start">
+                                                <li class="c6 li-bullet-0"><span class="c5">Instalare Java Development Kit</span></li>
+                                                <li class="c6 li-bullet-0"><span class="c5">Mediul integrat de dezvoltare Intellij IDEA</span></li>
+                                                <li class="c6 li-bullet-0"><span class="c5">Instalarea Intellij IDEA</span></li>
+                                                <li class="c6 li-bullet-0"><span class="c5">Rularea &#537;i configurarea ini&#539;ial&#259; Intellij
+                                                        IDEA</span></li>
+                                                <li class="c6 li-bullet-0"><span class="c5">Instalare GIT</span></li>
+                                                <li class="c6 li-bullet-0"><span class="c5">Creare Repozitoriu GIT</span></li>
+                                        </ul>
+                                        <p class="c42 c15 c73"><span class="c5"></span></p>
+                                        </td>
+                                        <td class="c49" colspan="1" rowspan="1">
+                                        <h2 class="c42" id="h.1t3h5sf"><span class="c7 c4">Cursantul va fi capabil:</span></h2>
+                                        <ul class="c32 lst-kix_list_4-0 start">
+                                                <li class="c6 li-bullet-0"><span class="c5">S&#259; instaleze Java</span></li>
+                                                <li class="c6 li-bullet-0"><span class="c8">S&#259; instaleze &#537;i s&#259; configureze mediul
+                                                        integrat de dezvoltare IntelliJ IDEA</span></li>
+                                                <li class="c6 li-bullet-0"><span class="c8">S&#259; creeze un proiect &icirc;n IntelliJ IDEA</span>
+                                                </li>
+                                                <li class="c6 li-bullet-0"><span class="c5">S&#259; ruleze o aplica&#539;ie Java folosind IntelliJ
+                                                        IDEA</span></li>
+                                        </ul>
+                                        </td>
+                                </tr>
+                                <tr class="c60">
+                                        <td class="c62" colspan="1" rowspan="1">
+                                        <h2 class="c42" id="h.4d34og8"><span class="c7 c4">&Icirc;ntreb&#259;ri / Exerci&#539;ii</span></h2>
+                                        </td>
+                                        <td class="c51" colspan="2" rowspan="1">
+                                        <h2 class="c42" id="h.2s8eyo1"><span class="c7 c4">Exerci&#539;ii de:</span></h2>
+                                        <ul class="c32 lst-kix_list_8-0 start">
+                                                <li class="c6 li-bullet-0"><span class="c5">Creare a unui proiect Java</span></li>
+                                                <li class="c6 li-bullet-0"><span class="c5">Rularea unei aplica&#539;ii Java folosind mediul
+                                                        integrat de dezvoltare IntelliJ IDEA</span></li>
+                                        </ul>
+                                        </td>
+                                </tr>
+                                </table>
+                        </div>
+                </div>
+        </div>
+
+
+        <div class="max-w-4xl mx-auto">
+                <div class="slide bg-white rounded-xl shadow-2xl overflow-hidden mb-8 transition-transform duration-300 hover:scale-105">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-4">
+                                <p class="c1 c15"><span class="c10"></span></p>
+                                <h4 class="c3 c30" id="h.17dp8vu"><span class="c28">Instalare Java Development Kit</span></h4>
+                                <p class="c28"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="c5">&Icirc;nainte de a
+                                        &icirc;ncepe studierea limbajului de programare Java este necesar&#259; instalarea kit-ului de dezvoltare
+                                        Java - Java Development Kit. JDK este o component&#259; major&#259; a mediului Java &#537;i ofer&#259; toate
+                                        instrumentele &#537;i fi&#537;ierele binare executabile necesare pentru compilarea, depanarea &#537;i
+                                        executarea programelor Java.</span></p>
+                                <p class="c12 c15"><span class="c5"></span></p>
+                                <p class="c12"><span class="c8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Desc&#259;rca&#539;i JDK 8 de pe
+                                </span><span class="c8 c13"><a class="c38"
+                                        href="https://www.google.com/url?q=https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html&amp;sa=D&amp;source=editors&amp;ust=1726943350778550&amp;usg=AOvVaw0_-L3Z9leW-gndw4csSniG">site-ul
+                                        oficial Oracle</a></span><span class="c5">&nbsp;pentru sistemul dumneavoastr&#259; de operare.</span>
+                                </p>
+                                <p class="c9"><span class="c5">Pe Windows:</span></p>
+                                <ol class="c32 lst-kix_list_6-0 start" start="1">
+                                <li class="c25 li-bullet-0"><span class="c5">Rula&#539;i fi&#537;ierul desc&#259;rcat;</span></li>
+                                <li class="c46 li-bullet-0"><span class="c5">Urma&#539;i pa&#537;ii din cadrul asistentului de instalare.</span>
+                                </li>
+                                </ol>
+                                <p class="c9"><span class="c5">Pe Mac OS:</span></p>
+                                <ol class="c32 lst-kix_list_2-0 start" start="1">
+                                <li class="c25 li-bullet-0"><span class="c5">Rula&#539;i fi&#537;ierul desc&#259;rcat;</span></li>
+                                <li class="c46 li-bullet-0"><span class="c5">Urma&#539;i pa&#537;ii din cadrul asistentului de instalare.</span>
+                                </li>
+                                </ol>
+                                <p class="c9"><span class="c5">Pe Linux:</span></p>
+                                <ol class="c32 lst-kix_list_1-0 start" start="1">
+                                <li class="c25 li-bullet-0"><span class="c5">Naviga&#539;i c&#259;tre directoriul &icirc;n care dori&#539;i
+                                        s&#259; instala&#539;i Java;</span></li>
+                                <li class="c28 c50 li-bullet-0"><span class="c5">Copia&#539;i fi&#537;ierul desc&#259;rcat &icirc;n mapa
+                                        curent&#259;;</span></li>
+                                <li class="c28 c50 li-bullet-0"><span class="c5">Despacheta&#539;i fi&#537;ierul .tar.gz;</span></li>
+                                <li class="c46 li-bullet-0"><span class="c5">&#536;terge&#539;i fi&#537;ierul .tar.gz din mapa
+                                        curent&#259;.</span></li>
+                                </ol>
+                                <p class="c9 c31"><span class="c8">Pentru a v&#259; asigura c&#259; JDK a fost instalat cu succes, deschide&#539;i
+                                        linia de comand pentru Windows, sau terminalul pentru Mac OS &#537;i Linux. Rula&#539;i urm&#259;toarea
+                                        comand&#259;: </span><span class="c8 c24">java --version</span><span class="c5">.</span></p>
+                                <p class="c9 c31"><span class="c5">Ca urmare a execu&#539;ie acestei comenzi v&#259; va fi afi&#537;at&#259;
+                                        versiunea instalat&#259; de Java:</span></p>
+                                <p class="c2"><span class="c7 c23">Java version &quot;1.8.0_131&quot;</span></p>
+                                <p class="c2"><span class="c7 c23">Java(TM) SE Runtime Environment (build 1.8.0_131-b11)</span></p>
+                                <p class="c2"><span class="c23">Java HotSpot(TM) 64-Bit Server VM (build 25.131-b11, mixed mode)</span></p>
+                        </div>
+                </div>
+        </div>
 
 
     <div class="slide">
