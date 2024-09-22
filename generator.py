@@ -46,7 +46,7 @@ def get_top_and_bottom_of_slide(slide_html):
         slide_html = re.sub(r'\s+', '', slide_html)
         return slide_html
 
-    # get rid of the body in the slide
+    # get rid of the body and head in the slide
     body_start_end = get_body_start_end(slide_html) + 1
 
     slide_html = slide_html[body_start_end:]
@@ -72,22 +72,18 @@ def add_slides(html_content, slide_html):
 
         return left_pointer, right_pointer+1
     
-    slide_start_marker = "<!-- slide start -->"
-    slide_end_marker = "<!-- slide end -->"
-
+    def replace_slide_marker(html_content, slide_marker, replace_with):
+        start_occurrence = html_content.find(slide_marker)
+        while start_occurrence != -1:
+            left, right = get_start_end_of_slide(html_content, start_occurrence)
+            html_content = html_content.replace(html_content[left:right], replace_with)
+            start_occurrence = html_content.find(slide_marker)
+        return html_content
+    
     slides_html_top, slides_html_bottom = get_top_and_bottom_of_slide(slide_html)
 
-    start_occurrence = html_content.find("vmm-slide-start")
-    while start_occurrence != -1:
-        left, right = get_start_end_of_slide(html_content, start_occurrence)
-        html_content = html_content.replace(html_content[left:right], slide_start_marker + slides_html_top + slide_start_marker)
-        start_occurrence = html_content.find("vmm-slide-start")
-    
-    end_occurrence = html_content.find("vmm-slide-end")
-    while end_occurrence != -1:
-        left, right = get_start_end_of_slide(html_content, end_occurrence)
-        html_content = html_content.replace(html_content[left:right], slide_end_marker + slides_html_bottom + slide_end_marker)
-        end_occurrence = html_content.find("vmm-slide-end")
+    html_content = replace_slide_marker(html_content, "vmm-slide-start", "<!-- slide start -->" + slides_html_top + "<!-- slide start -->")
+    html_content = replace_slide_marker(html_content, "vmm-slide-end", "<!-- slide end -->" + slides_html_bottom + "<!-- slide end -->")
     
     return html_content
 
