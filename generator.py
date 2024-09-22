@@ -35,10 +35,13 @@ def replace_css(html_content, docx_css_name = "docx.css", new_css_name = "style.
     html_content = html_content.replace('<style type="text/css"></style>', f"""<link rel="stylesheet" href="{docx_css_name}"><link rel="stylesheet" href="{new_css_name}">""")
     return html_content
     
-def get_top_and_bottom_of_slide(slide_html_path=SLIDE_HTML_PATH):
+def get_top_and_bottom_of_slide(slide_html_path="slide.html"):
     def calculate_top_of_slide(slide_html):
-        slide_html = slide_html.split("</")
-        return slide_html[0]
+        slide_html = slide_html.split("</")[0]
+        start = slide_html.find("<")
+        end = slide_html.rfind(">")
+        slide_html = slide_html[start:end+1]
+        return slide_html
 
     def calculate_bottom_of_slide(slide_html, slide_html_top):
         slide_html = slide_html.replace(slide_html_top, "")
@@ -46,6 +49,12 @@ def get_top_and_bottom_of_slide(slide_html_path=SLIDE_HTML_PATH):
         return slide_html
 
     slide_html = read_file(slide_html_path)
+
+    # get rid of the body in the slide
+    body_start = get_body_start(slide_html) 
+
+    slide_html = slide_html[body_start:]
+    slide_html = slide_html.replace("</body>", "")
 
     slide_html_top = calculate_top_of_slide(slide_html)
     slide_html_bottom = calculate_bottom_of_slide(slide_html, slide_html_top)
@@ -86,7 +95,7 @@ def add_slides(html_content):
     
     return html_content
 
-def find_body_start(html_content):
+def get_body_start(html_content):
     body_pointer = html_content.find("body class")
     while True:
         if html_content[body_pointer] == ">":
@@ -94,23 +103,33 @@ def find_body_start(html_content):
         body_pointer += 1
     return body_pointer + 1
 
-def find_body_end(html_content):
+def get_body_end(html_content):
     body_pointer = html_content.find("</body>")
     return body_pointer
 
 def add_css_body(html_content):
-    start = find_body_start(html_content)
+    start = get_body_start(html_content)
     html_content = html_content[:start] + '<div class="body">' + html_content[start:]
 
-    end = find_body_end(html_content)
+    end = get_body_end(html_content)
     html_content = html_content[:end] + '</div>' + html_content[end:]
 
     return html_content
 
 def add_script(html_content):
-    end = find_body_end(html_content)
+    end = get_body_end(html_content)
     html_content = html_content[:end] + '<script src="script.js"></script>' + html_content[end:]
 
+    return html_content
+
+def add_slides_class_body(html_content, slide_html):
+    slides_body_start = get_body_start(slide_html) 
+
+    slide_html_class_body = slide_html[:slides_body_start-1].split("=")[1]
+
+    html_body_start = get_body_start(html_content) - 1
+
+    html_content = html_content[:html_body_start] +  f' class = {slide_html_class_body}' + html_content[html_body_start:] 
     return html_content
 
 html_content = read_file("CursJavaFundamentals.html")
@@ -120,6 +139,8 @@ html_content = replace_css(html_content)
 html_content = add_css_body(html_content)
 
 html_content = add_slides(html_content)
+
+html_content = add_slides_class_body(html_content, read_file(SLIDE_HTML_PATH))
 
 html_content = add_script(html_content)
 
