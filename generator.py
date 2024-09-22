@@ -86,12 +86,32 @@ def add_slides(html_content):
     
     return html_content
 
+def find_body_start(html_content):
+    body_pointer = html_content.find("body class")
+    while True:
+        if html_content[body_pointer] == ">":
+            break
+        body_pointer += 1
+    return body_pointer + 1
 
+def find_body_end(html_content):
+    body_pointer = html_content.find("</body>")
+    return body_pointer
+
+def add_css_body(html_content):
+    start = find_body_start(html_content)
+    html_content = html_content[:start] + '<div class="body">' + html_content[start:]
+
+    end = find_body_end(html_content)
+    html_content = html_content[:end] + '</div>' + html_content[end:]
+
+    return html_content
 
 html_content = read_file("CursJavaFundamentals.html")
 
 html_content = replace_css(html_content)
 
+html_content = add_css_body(html_content)
 
 html_content = add_slides(html_content)
 
