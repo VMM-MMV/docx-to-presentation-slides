@@ -117,7 +117,7 @@ def add_css_body(html_content):
     start = get_body_start_end(html_content) + 1
     end = get_body_end(html_content)
 
-    return html_content[:start] + '<div class="body">' + html_content[start:end] + '</div>' + html_content[end:]
+    return html_content[:start]+ '<div class="body flex flex-col items-center justify-center">' + html_content[start:end] + '</div>' + html_content[end:]
 
 def add_script(html_content):
     """Append a script tag before the closing </body> tag."""
