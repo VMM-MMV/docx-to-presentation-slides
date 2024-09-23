@@ -31,7 +31,9 @@ def replace_css(html_content, slide_html):
         return html[start:end]
 
     old_css = extract_head(html_content)
-    # write_file("docx.css", old_css)
+    old_css_start = old_css.find('<style type="text/css"') + len('<style type="text/css">')
+    old_css_end = old_css.find('</style>')
+    write_file("docx.css", old_css[old_css_start:old_css_end])
     
     return html_content.replace(old_css, extract_head(slide_html))
     
