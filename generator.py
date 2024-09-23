@@ -29,8 +29,11 @@ def replace_css(html_content, slide_html):
         start = html.find("<head>")
         end = html.find("</head>") + len("</head>")
         return html[start:end]
+
+    old_css = extract_head(html_content)
+    # write_file("docx.css", old_css)
     
-    return html_content.replace(extract_head(html_content), extract_head(slide_html))
+    return html_content.replace(old_css, extract_head(slide_html))
     
 def get_top_and_bottom_of_slide(slide_html):
     """Extract the top and bottom of the slide content, ignoring <body> and <head> tags."""
