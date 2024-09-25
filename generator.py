@@ -142,7 +142,9 @@ def add_slides_class_body(html_content, slide_html):
     html_content = html_content[:html_body_start] +  f' class = {slide_html_class_body}' + html_content[html_body_start:] 
     return html_content
 
-html_content = read_file("CursJavaFundamentals.html")
+html_name, output_name = get_argv()
+
+html_content = read_file(html_name)
 
 slide_html = read_file(SLIDE_HTML_PATH)
 
@@ -156,4 +158,4 @@ html_content = add_slides(html_content, slide_html)
 
 html_content = add_script(html_content)
 
-write_file("jora.html", html_content)
+write_file(f"{output_name}.html", html_content)
