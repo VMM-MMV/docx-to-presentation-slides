@@ -2,7 +2,10 @@ import sys
 import re
 import logging
 
-SLIDE_HTML_PATH = "slide.html"
+ROOT = "prerequisites"
+SLIDE_HTML_PATH = f"{ROOT}/slide.html"
+DOCX_CSS_PATH = f"{ROOT}/docx.css"
+SCRIPT_PATH = f"{ROOT}/script.js"
 
 logging.basicConfig(level=logging.WARNING)
 log = logging.getLogger(__name__)
@@ -33,7 +36,7 @@ def replace_css(html_content, slide_html):
     old_css = extract_head(html_content)
     old_css_start = old_css.find('<style type="text/css"') + len('<style type="text/css">')
     old_css_end = old_css.find('</style>')
-    write_file("docx.css", old_css[old_css_start:old_css_end])
+    write_file(DOCX_CSS_PATH, old_css[old_css_start:old_css_end])
     
     return html_content.replace(old_css, extract_head(slide_html))
     
@@ -124,7 +127,7 @@ def add_css_body(html_content):
 def add_script(html_content):
     """Append a script tag before the closing </body> tag."""
     end = get_body_end(html_content)
-    return html_content[:end] + '<script src="script.js"></script>' + html_content[end:]
+    return html_content[:end] + f'<script src="{SCRIPT_PATH}"></script>' + html_content[end:]
 
 def add_slides_class_body(html_content, slide_html):
     """Transfer the body class from slide_html to html_content."""

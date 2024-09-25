@@ -1,3 +1,6 @@
 docx.css
-test.py
-jora.html
+/images/*
+!/images/README.md
+
+*.html
+!/prerequisites/slide.html
