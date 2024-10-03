@@ -69,16 +69,16 @@ def get_top_and_bottom_of_slide(slide_html):
     return slide_html_top, slide_html_bottom
 
 """Insert slide contents into placeholders in html_content."""
-def get_slide_bounds(content, index):
+def get_html_bounds(content, index, depth=2):
     left_brackets, right_brackets = 0, 0
     left, right = index, index
 
-    while left_brackets < 2:
+    while left_brackets < depth:
         left -= 1
         if content[left] == "<":
             left_brackets += 1
 
-    while right_brackets < 2:
+    while right_brackets < depth:
         right += 1
         if content[right] == ">":
             right_brackets += 1
@@ -87,7 +87,7 @@ def get_slide_bounds(content, index):
 
 def replace_slide_marker(html_content, slide_marker, replace_with):
     while (start_occurrence := html_content.find(slide_marker)) != -1:
-        left, right = get_slide_bounds(html_content, start_occurrence)
+        left, right = get_html_bounds(html_content, start_occurrence)
         html_content = html_content.replace(html_content[left:right], replace_with)
     return html_content
 
@@ -146,34 +146,39 @@ def add_slides_class_body(html_content, slide_html):
     return html_content
 
 def add_quiz(html_content, slide_html):
-    slides_html_top, slides_html_bottom = get_top_and_bottom_of_slide(slide_html)
-
-    full_quiz_start, quiz_start = get_slide_bounds(html_content, html_content.find("vmm-quiz-start"))
-    quiz_end, full_quiz_end = get_slide_bounds(html_content, html_content.find("vmm-quiz-end"))
+    def replace_bold(html):
+        replacements = {
+            "c41": "c5",
+            "c7": "c1",
+            "c25": "c1",
+            "c16": "c3"
+        }
+        for bold, not_bold in replacements.items():
+            html = html.replace(bold, not_bold)
+        return html
+    
+    full_quiz_start, quiz_start = get_html_bounds(html_content, html_content.find("vmm-quiz-start"))
+    quiz_end, full_quiz_end = get_html_bounds(html_content, html_content.find("vmm-quiz-end"))
 
     quiz_html = html_content[quiz_start:quiz_end]
 
-    start_occurrence = quiz_html.find("vmm-quiz-separator")
-
-    left, right = get_slide_bounds(quiz_html, start_occurrence)
+    left, right = get_html_bounds(quiz_html, quiz_html.find("vmm-quiz-separator"))
     separator_html = quiz_html[left:right]
 
     quiz_html_questions = quiz_html.split(separator_html)
 
-    quiz_html_questions = zip([x.replace("c41", "c5").replace("c7", "c1").replace("c25", "c1").replace("c16", "c3") for x in quiz_html_questions], quiz_html_questions)
+    quiz_html_questions = zip([replace_bold(x) for x in quiz_html_questions], quiz_html_questions)
 
     slides_html_top, slides_html_bottom = get_top_and_bottom_of_slide(slide_html)
 
     top = "<!-- quiz start -->" + slides_html_top + "<!-- quiz start -->"
     bottom = "<!-- quiz end -->" + slides_html_bottom + "<!-- quiz end -->"
-    quiz_html = "".join([f"{top} {original} {bottom} {top} {modified} {bottom}" for original, modified in quiz_html_questions])
+    quiz_html = "".join([f"{top} {original} {bottom} {top} {modified} {bottom}" for modified, original in quiz_html_questions])
 
     html_content = html_content.replace(html_content[full_quiz_start:full_quiz_end], quiz_html)
     return html_content
 
-# html_name, output_name = get_argv()
-
-html_name = "JavaFundamentalsl6.docx.html"
+html_name, output_name = get_argv()
 
 html_content = read_file(html_name)
 
@@ -190,7 +195,5 @@ html_content = add_slides(html_content, slide_html)
 html_content = add_script(html_content)
 
 html_content = add_quiz(html_content, slide_html)
-
-output_name = "aaaa"
 
 write_file(f"{output_name}.html", html_content)
