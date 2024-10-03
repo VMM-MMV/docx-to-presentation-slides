@@ -68,30 +68,30 @@ def get_top_and_bottom_of_slide(slide_html):
     slide_html_bottom = get_bottom_of_slide(slide_html, slide_html_top)
     return slide_html_top, slide_html_bottom
 
+"""Insert slide contents into placeholders in html_content."""
+def get_slide_bounds(content, index):
+    left_brackets, right_brackets = 0, 0
+    left, right = index, index
+
+    while left_brackets < 2:
+        left -= 1
+        if content[left] == "<":
+            left_brackets += 1
+
+    while right_brackets < 2:
+        right += 1
+        if content[right] == ">":
+            right_brackets += 1
+
+    return left, right + 1
+
+def replace_slide_marker(html_content, slide_marker, replace_with):
+    while (start_occurrence := html_content.find(slide_marker)) != -1:
+        left, right = get_slide_bounds(html_content, start_occurrence)
+        html_content = html_content.replace(html_content[left:right], replace_with)
+    return html_content
+
 def add_slides(html_content, slide_html):
-    """Insert slide contents into placeholders in html_content."""
-    def get_slide_bounds(content, index):
-        left_brackets, right_brackets = 0, 0
-        left, right = index, index
-
-        while left_brackets < 2:
-            left -= 1
-            if content[left] == "<":
-                left_brackets += 1
-
-        while right_brackets < 2:
-            right += 1
-            if content[right] == ">":
-                right_brackets += 1
-
-        return left, right + 1
-    
-    def replace_slide_marker(html_content, slide_marker, replace_with):
-        while (start_occurrence := html_content.find(slide_marker)) != -1:
-            left, right = get_slide_bounds(html_content, start_occurrence)
-            html_content = html_content.replace(html_content[left:right], replace_with)
-        return html_content
-    
     slides_html_top, slides_html_bottom = get_top_and_bottom_of_slide(slide_html)
 
     html_content = replace_slide_marker(html_content, "vmm-slide-start", "<!-- slide start -->" + slides_html_top + "<!-- slide start -->")
@@ -145,7 +145,35 @@ def add_slides_class_body(html_content, slide_html):
     html_content = html_content[:html_body_start] +  f' class = {slide_html_class_body}' + html_content[html_body_start:] 
     return html_content
 
-html_name, output_name = get_argv()
+def add_quiz(html_content, slide_html):
+    slides_html_top, slides_html_bottom = get_top_and_bottom_of_slide(slide_html)
+
+    full_quiz_start, quiz_start = get_slide_bounds(html_content, html_content.find("vmm-quiz-start"))
+    quiz_end, full_quiz_end = get_slide_bounds(html_content, html_content.find("vmm-quiz-end"))
+
+    quiz_html = html_content[quiz_start:quiz_end]
+
+    start_occurrence = quiz_html.find("vmm-quiz-separator")
+
+    left, right = get_slide_bounds(quiz_html, start_occurrence)
+    separator_html = quiz_html[left:right]
+
+    quiz_html_questions = quiz_html.split(separator_html)
+
+    quiz_html_questions = zip([x.replace("c41", "c5").replace("c7", "c1").replace("c25", "c1").replace("c16", "c3") for x in quiz_html_questions], quiz_html_questions)
+
+    slides_html_top, slides_html_bottom = get_top_and_bottom_of_slide(slide_html)
+
+    top = "<!-- quiz start -->" + slides_html_top + "<!-- quiz start -->"
+    bottom = "<!-- quiz end -->" + slides_html_bottom + "<!-- quiz end -->"
+    quiz_html = "".join([f"{top} {original} {bottom} {top} {modified} {bottom}" for original, modified in quiz_html_questions])
+
+    html_content = html_content.replace(html_content[full_quiz_start:full_quiz_end], quiz_html)
+    return html_content
+
+# html_name, output_name = get_argv()
+
+html_name = "JavaFundamentalsl6.docx.html"
 
 html_content = read_file(html_name)
 
@@ -160,5 +188,9 @@ html_content = add_css_body(html_content)
 html_content = add_slides(html_content, slide_html)
 
 html_content = add_script(html_content)
+
+html_content = add_quiz(html_content, slide_html)
+
+output_name = "aaaa"
 
 write_file(f"{output_name}.html", html_content)
