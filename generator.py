@@ -160,6 +160,8 @@ def add_quiz(html_content, slide_html):
     full_quiz_start, quiz_start = get_html_bounds(html_content, html_content.find("vmm-quiz-start"))
     quiz_end, full_quiz_end = get_html_bounds(html_content, html_content.find("vmm-quiz-end"))
 
+    if (full_quiz_start == -1 or full_quiz_end == -1): return
+
     quiz_html = html_content[quiz_start:quiz_end]
 
     left, right = get_html_bounds(quiz_html, quiz_html.find("vmm-quiz-separator"))
