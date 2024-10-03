@@ -173,7 +173,7 @@ def add_quiz(html_content, slide_html):
 
     top = "<!-- quiz start -->" + slides_html_top + "<!-- quiz start -->"
     bottom = "<!-- quiz end -->" + slides_html_bottom + "<!-- quiz end -->"
-    quiz_html = "".join([f"{top} {original} {bottom} {top} {modified} {bottom}" for modified, original in quiz_html_questions])
+    quiz_html = "".join([f"{top} {modified} {bottom} {top} {original} {bottom}" for modified, original in quiz_html_questions])
 
     html_content = html_content.replace(html_content[full_quiz_start:full_quiz_end], quiz_html)
     return html_content
