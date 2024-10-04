@@ -149,9 +149,9 @@ def add_quiz(html_content, slide_html):
     def replace_bold(html):
         replacements = {
             "c41": "c5",
-            "c7": "c1",
+            "c7": "c4",
             "c25": "c1",
-            "c16": "c3"
+            "c16": "c3",
         }
         for bold, not_bold in replacements.items():
             html = html.replace(bold, not_bold)
