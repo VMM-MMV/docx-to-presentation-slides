@@ -184,10 +184,9 @@ def add_quiz(html_content, slide_html):
                 if too_many_to_replace: continue
 
                 for span in spans:
-                    classes.append("".join(span.get("class")))
-                
+                    classes.append(" ".join(span.get("class")))
             html_content = replace_least_common_with_most_common(classes)
-            html_content = replace_bold_manually(html_content)
+            # html_content = replace_bold_manually(html_content)
         
         return html_content
     
