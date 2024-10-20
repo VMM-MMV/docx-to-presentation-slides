@@ -148,67 +148,6 @@ def add_slides_class_body(html_content, slide_html):
     return html_content
 
 def add_quiz(html_content, slide_html):
-#     def dynamic_replace_bold(html):
-#         ol_content = re.findall(r'<ol(.*?)</ol>', html, re.DOTALL)
-#         pattern = r'<span class="([^"]+)">'
-
-#         matches = re.findall(pattern, "".join(ol_content))
-
-#         counter = Counter(matches)
-
-#         # Find the most common element
-#         most_common, _ = counter.most_common(1)[0]
-
-#         matches.remove(most_common)
-#         matches = set(matches)
-#         return {x: most_common for x in matches}
-
-#     def replace_bold(html):
-#         # replacements = dynamic_replace_bold(html)
-
-#         replacements = {
-#             "c4 c24 c45": "c1"
-#             # "c11 c42 c45 c43": "c0",
-#             # "c20 c7": "c6",
-#             # "c42 c44": "c6",
-#             # "c7 c20": "c6",
-#             # "c7 c42 c43 c45": "c0",
-#             # "c7 c42 c45 c43": "c0"
-#         }
-        
-#         for bold, not_bold in replacements.items():
-#             html = html.replace(bold, not_bold)
-#         return html
-    
-#     quiz_separator_start, quiz_separotor_end = html_content.find("vmm-quiz-start"), html_content.find("vmm-quiz-end")
-#     if (quiz_separator_start == -1 or quiz_separotor_end == -1): return html_content
-
-#     full_quiz_start, quiz_start = get_html_bounds(html_content, quiz_separator_start)
-#     quiz_end, full_quiz_end = get_html_bounds(html_content, quiz_separotor_end)
-
-#     quiz_html = html_content[quiz_start:quiz_end]
-
-#     left, right = get_html_bounds(quiz_html, quiz_html.find("vmm-quiz-separator"))
-#     separator_html = quiz_html[left:right]
-
-#     quiz_questions = quiz_html.split(separator_html)
-#     # ol_content = re.findall(r'<ol(.*?)</ol>', quiz_questions[6], re.DOTALL)
-#     # li_content = re.findall(r'<li class="[^"]+">(.*?)<\/li>', "".join(ol_content), re.DOTALL)
-#     # for line in li_content:
-#     #     line.split
-#     #     print()
-
-#     quiz_questions = zip([replace_bold(x) for x in quiz_questions], quiz_questions)
-
-#     slides_html_top, slides_html_bottom = get_top_and_bottom_of_slide(slide_html)
-
-#     top = "<!-- quiz start -->" + slides_html_top + "<!-- quiz start -->"
-#     bottom = "<!-- quiz end -->" + slides_html_bottom + "<!-- quiz end -->"
-#     quiz_html = "".join([f"{top} {modified} {bottom} {top} {original} {bottom}" for modified, original in quiz_questions])
-
-#     html_content = html_content.replace(html_content[full_quiz_start:full_quiz_end], quiz_html)
-#     return html_content
-
     def replace_bold(html_content):
         def replace_least_common_with_most_common(classes):
             if classes == []: return html_content
@@ -219,6 +158,15 @@ def add_quiz(html_content, slide_html):
             least_common_class, _ = min(class_counts.items(), key=lambda x: x[1])
 
             return html_content.replace(least_common_class, most_common_class)
+        
+        def replace_bold_manually(html):
+            replacements = {
+                "c1": "c8"
+            }
+
+            for bold, not_bold in replacements.items():
+                html = html.replace(bold, not_bold)
+            return html
 
         soup = BeautifulSoup(html_content, 'html.parser')
 
@@ -239,6 +187,7 @@ def add_quiz(html_content, slide_html):
                     classes.append("".join(span.get("class")))
                 
             html_content = replace_least_common_with_most_common(classes)
+            html_content = replace_bold_manually(html_content)
         
         return html_content
     
