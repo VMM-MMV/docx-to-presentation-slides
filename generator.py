@@ -191,23 +191,68 @@ def add_quiz(html_content, slide_html):
 #     left, right = get_html_bounds(quiz_html, quiz_html.find("vmm-quiz-separator"))
 #     separator_html = quiz_html[left:right]
 
-#     quiz_html_questions = quiz_html.split(separator_html)
-#     # ol_content = re.findall(r'<ol(.*?)</ol>', quiz_html_questions[6], re.DOTALL)
+#     quiz_questions = quiz_html.split(separator_html)
+#     # ol_content = re.findall(r'<ol(.*?)</ol>', quiz_questions[6], re.DOTALL)
 #     # li_content = re.findall(r'<li class="[^"]+">(.*?)<\/li>', "".join(ol_content), re.DOTALL)
 #     # for line in li_content:
 #     #     line.split
 #     #     print()
 
-#     quiz_html_questions = zip([replace_bold(x) for x in quiz_html_questions], quiz_html_questions)
+#     quiz_questions = zip([replace_bold(x) for x in quiz_questions], quiz_questions)
 
 #     slides_html_top, slides_html_bottom = get_top_and_bottom_of_slide(slide_html)
 
 #     top = "<!-- quiz start -->" + slides_html_top + "<!-- quiz start -->"
 #     bottom = "<!-- quiz end -->" + slides_html_bottom + "<!-- quiz end -->"
-#     quiz_html = "".join([f"{top} {modified} {bottom} {top} {original} {bottom}" for modified, original in quiz_html_questions])
+#     quiz_html = "".join([f"{top} {modified} {bottom} {top} {original} {bottom}" for modified, original in quiz_questions])
 
 #     html_content = html_content.replace(html_content[full_quiz_start:full_quiz_end], quiz_html)
 #     return html_content
+
+    def replace_bold(html_content):
+        def replace_least_common_with_most_common(classes):
+            if classes == []: return html_content
+            class_counts = Counter(classes)
+
+            most_common_class, _ = class_counts.most_common(1)[0]
+
+            least_common_class, _ = min(class_counts.items(), key=lambda x: x[1])
+
+            return html_content.replace(least_common_class, most_common_class)
+
+        soup = BeautifulSoup(html_content, 'html.parser')
+
+        ordered_lists = soup.find_all('ol')
+
+        for ol in ordered_lists:
+            answers = ol.find_all('li')
+            insuficient_answers_for_guess = len(answers) <= 2
+            if insuficient_answers_for_guess: break
+            
+            classes = []
+            for answer in answers:
+                spans = answer.find_all('span')
+                too_many_to_replace = len(spans) > 1  # TODO: This should be handled
+                if too_many_to_replace: continue
+
+                for span in spans:
+                    classes.append("".join(span.get("class")))
+                
+            html_content = replace_least_common_with_most_common(classes)
+        
+        return html_content
+    
+    def get_questions(quiz_html):
+        while True:
+            separator = quiz_html.find("vmm-quiz-separator")
+
+            if separator == -1: break
+            left, right = get_html_bounds(quiz_html, separator)
+            separator_html = quiz_html[left:right]
+
+            quiz_html = quiz_html.replace(separator_html, "<separator-break>")
+
+        return quiz_html.split("<separator-break>")
 
     quiz_separator_start, quiz_separator_end = html_content.find("vmm-quiz-start"), html_content.find("vmm-quiz-end")
     if (quiz_separator_start == -1 or quiz_separator_end == -1): return html_content
@@ -217,49 +262,17 @@ def add_quiz(html_content, slide_html):
 
     quiz_html = html_content[quiz_start:quiz_end]
 
-    while True:
-        separator = quiz_html.find("vmm-quiz-separator")
+    quiz_questions = get_questions(quiz_html)
 
-        if separator == -1: break
-        left, right = get_html_bounds(quiz_html, separator)
-        separator_html = quiz_html[left:right]
+    quiz_questions = zip([replace_bold(x) for x in quiz_questions], quiz_questions)
 
-        quiz_html = quiz_html.replace(separator_html, "<separator-break>")
+    slides_html_top, slides_html_bottom = get_top_and_bottom_of_slide(slide_html)
 
-    quiz_html_questions = quiz_html.split("<separator-break>")
+    top = "<!-- quiz start -->" + slides_html_top + "<!-- quiz start -->"
+    bottom = "<!-- quiz end -->" + slides_html_bottom + "<!-- quiz end -->"
+    quiz_html = "".join([f"{top} {modified} {bottom} {top} {original} {bottom}" for modified, original in quiz_questions])
 
-    # for i in quiz_html_questions:
-    #     print(i)
-    #     print(" " * 100)
-    soup = BeautifulSoup(html_content, 'html.parser')
-
-    ordered_lists = soup.find_all('ol')
-
-    for ol in ordered_lists:
-        answers = ol.find_all('li')
-        insuficient_answers_for_guess = len(answers) <= 2
-        if insuficient_answers_for_guess: break
-        
-        classes = []
-        for answer in answers:
-            spans = answer.find_all('span')
-            too_many_to_replace = len(spans) > 1
-            if too_many_to_replace: continue
-
-            for span in spans:
-                # print(f'{span.get("class")}', end = "")
-                classes.append("".join(span.get("class")))
-            # print()
-
-        if classes == []: continue
-        class_counts = Counter(classes)
-
-        most_common_class, _ = class_counts.most_common(1)[0]
-
-        least_common_class, _ = min(class_counts.items(), key=lambda x: x[1])
-
-        html_content = html_content.replace(least_common_class, most_common_class)
-        # print()
+    html_content = html_content.replace(html_content[full_quiz_start:full_quiz_end], quiz_html)
 
     return html_content
 
