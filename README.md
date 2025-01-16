@@ -1,6 +1,6 @@
 A short python script which turns docx files, to html presentations.
 
-It looks something like this
+It looks something like this  
 Slide1:
 ![image](https://github.com/user-attachments/assets/cb1f5147-456c-4c8e-84f8-c4b3b575199c)  
 Slide2:
