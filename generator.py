@@ -224,7 +224,7 @@ def add_quiz(html_content, slide_html):
 
     return html_content
 
-html_name, output_name = "deletelater2.docx.html", "test" # get_argv()
+html_name, output_name = get_argv()
 
 html_content = read_file(html_name)
 
