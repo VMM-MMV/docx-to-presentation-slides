@@ -23,7 +23,7 @@ From this docx:
 1. Write your content (text, images, etc.) in a `.docx` file using an online editor.
 2. Use the tags `<vmm-slide-start>` and `<vmm-slide-end>` to define the boundaries of each slide in the document.
 3. Download the `.docx` file as HTML.
-4. Clone or copy this repository.
+4. Clone or download this repository.
 5. Unzip the `.docx` HTML file into the repository folder. Example:
    ![Unzip](https://github.com/user-attachments/assets/f50df6ce-bd9b-4f1b-a48b-b9b32bdc7712)
 6. Run the following command to generate the slides:
